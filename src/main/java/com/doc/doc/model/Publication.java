@@ -34,5 +34,5 @@ public class Publication {
     @Column(name = "PublicationType")
     private PublicationType publicationType;
     @OneToMany(mappedBy = "publication")
-    private List<ActeurPublication> acteurs = new ArrayList<>();
+    private List<AuteurPublication> auteur = new ArrayList<>();
 }

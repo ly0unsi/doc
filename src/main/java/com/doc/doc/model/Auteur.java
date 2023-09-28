@@ -22,6 +22,6 @@ public class Auteur extends Personne{
     @Column(name = "DateContribution")
     private Instant dateContribution;
     @OneToMany(mappedBy = "auteur")
-    private List<ActeurPublication> publications = new ArrayList<>();
+    private List<AuteurPublication> publications = new ArrayList<>();
 
 }
