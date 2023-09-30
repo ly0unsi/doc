@@ -29,4 +29,7 @@ public class EtatAvancement {
     private String description;
     @Column(name = "Evaluation")
     private String evaluation;
+    @ManyToOne
+    @JoinColumn(name = "sujetThese")
+    private SujetThese sujetThese;
 }
