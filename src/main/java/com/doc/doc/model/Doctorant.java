@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 @Entity
 @DiscriminatorValue("doctorant")
-
 public class Doctorant extends Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +23,7 @@ public class Doctorant extends Personne {
     private String cne;
 
     @ManyToMany
-    @JoinTable(name = "doctorant_reunion",
-            joinColumns = @JoinColumn(name = "doctorant_id"),
-            inverseJoinColumns = @JoinColumn(name = "reunion_id"))
+    @JoinTable(name = "doctorant_reunion", joinColumns = @JoinColumn(name = "doctorant_id"), inverseJoinColumns = @JoinColumn(name = "reunion_id"))
     private List<Reunion> reunions = new ArrayList<>();
 
     @OneToOne(mappedBy = "doctorant")
