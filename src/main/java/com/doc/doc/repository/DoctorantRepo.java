@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DoctorantRepo extends JpaRepository<Doctorant, Long> {
 
+
+
 }
