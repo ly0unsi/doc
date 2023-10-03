@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Data
 @Builder
 public class Absence {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +25,5 @@ public class Absence {
     private Long doctorant;
     @Column(name = "RaisonAbsence")
     private String raisonAbsence;
-
 
 }
