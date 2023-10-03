@@ -25,10 +25,10 @@ public class EtatAvancement {
     private Instant date;
     @Column(name = "Titre")
     private String title;
-    @Column(name = "Description")
+    @Column(name = "Description", length = 400)
     private String description;
     @Column(name = "Evaluation")
-    private String evaluation;
+    private int evaluation;
     @ManyToOne
     @JoinColumn(name = "sujetThese")
     private SujetThese sujetThese;

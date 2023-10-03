@@ -28,13 +28,22 @@ table th {
     background-color: #eeecfd !important;
 }
 
-/* #myPieChart {
-    width: 200px !important;
-    height: 200px !important;
+/* #barChart {
+
+    height: 65vh !important;
+    width: 100% !important;
 } */
 
 .chartContainer {
     background: whitesmoke;
     padding: 0px;
     border-radius: 12px;
+
 }
+
+/* .chartContainer2 {
+    width: 65%;
+    background: whitesmoke;
+    padding: 0px;
+    border-radius: 12px;
+} */

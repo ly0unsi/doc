@@ -1,8 +1,11 @@
 package com.doc.doc.service;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -108,6 +111,7 @@ public class DemoDataService {
         doctorant1.getReunions().add(reunion2);
         doctorant1.getReunions().add(reunion3);
         doctorant1.getReunions().add(reunion4);
+        doctorant1.getReunions().add(reunion5);
         doctorantRepository.save(doctorant1);
 
         SujetThese sujetThese = new SujetThese();
@@ -115,19 +119,24 @@ public class DemoDataService {
         sujetThese.setDescription("Sujet  Description");
         sujetThese.setMotsCles("Keyword 1, Keyword2 ");
         sujetThese.setDoctorant(doctorant1);
-
         sujetTheseRepo.save(sujetThese);
-        for (int i = 1; i <= 3; i++) {
 
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+        for (int i = 1; i <= 5; i++) {
             // Create and save one EtatAvancement instance for each SujetThese
             EtatAvancement etatAvancement = new EtatAvancement();
-            etatAvancement.setDate(Instant.now());
+            etatAvancement.setDate(currentDate.toInstant());
             etatAvancement.setTitle("Etat " + i + " Title");
-            etatAvancement.setDescription("Etat " + i + " Description");
-            etatAvancement.setEvaluation("Evaluation " + i);
+            etatAvancement.setDescription(
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit luctus mattis. Aenean faucibus pharetra tempor. Nam semper mauris eu dictum facilisis. Duis ac elit elit. Donec nec porta sem, ");
+            etatAvancement.setEvaluation(i + 7);
             etatAvancement.setSujetThese(sujetThese);
 
             etatAvancementRepo.save(etatAvancement);
+
+            calendar.add(Calendar.MONTH, 1);
+            currentDate = calendar.getTime();
         }
 
         // Create three Auteur objects
