@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:extends="base-layout">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Home Page</title>
@@ -11,7 +11,7 @@
 
 <body>
     <!-- Define page-specific content -->
-    <div th:fragment="content">
+    <div>
 
         <div class="container">
             <div class="row">
@@ -35,21 +35,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="align-middle">
+                                    <tr th:each="doctorant : ${doctorants}" class="align-middle">
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
                                                     class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
                                                 <div>
-                                                    <div class="h6 mb-0 lh-1">Mark Voldov</div>
+                                                    <div class="h6 mb-0 lh-1" th:text="${doctorant?.fname}">Mark Voldov
+                                                    </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>1245</td>
-                                        <td>G542158</td>
-                                        <td> <span class="d-inline-block align-middle">E125355</span></td>
+                                        <td th:text="${doctorant?.apogee}">1245</td>
+                                        <td th:text="${doctorant?.cne}">G542158</td>
+                                        <td><span class="d-inline-block align-middle"
+                                                th:text="${doctorant?.cin}">E125355</span></td>
                                         <td><span>21 Sep, 2021</span></td>
-                                        <td>Ai theory</td>
+                                        <td th:text="${doctorant?.sujetThese?.title}">Ai theory</td>
                                         <td class="text-end">
                                             <div class="drodown">
                                                 <a data-bs-toggle="dropdown" href="#" class="btn p-1"
@@ -65,8 +67,6 @@
                                                 </div>
                                             </div>
                                         </td>
-
-
                                     </tr>
 
                                 </tbody>

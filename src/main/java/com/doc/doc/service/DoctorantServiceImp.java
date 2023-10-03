@@ -8,10 +8,11 @@ import com.doc.doc.repository.PublicationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class DoctorantServiceImp implements DoctorantService{
+public class DoctorantServiceImp implements DoctorantService {
     @Autowired
     private DoctorantRepo doctorantRepo;
     @Autowired
@@ -23,16 +24,19 @@ public class DoctorantServiceImp implements DoctorantService{
     }
 
     @Override
-    public List<Publication> loadPublications(Long id) {
-        return publicationRepo.findPublicationsByDoctorantId(id);
+    public List<Publication> loadPublications(Long docid) {
+        Doctorant doctorant = doctorantRepo.findById(docid).orElse(null);
+        List<Doctorant> doctorants = Arrays.asList(doctorant);
+        return publicationRepo.findPublicationsByDoctorantId(docid);
     }
 
     @Override
     public List<AbsenceDTO> absence(int id) {
         int nombreAbsence;
-        int nombreReunion ;
-        //getAllReunion by year
-        //iterate over all reunions and check if Doctorant is absent if so incrment nombreAbsence
+        int nombreReunion;
+        // getAllReunion by year
+        // iterate over all reunions and check if Doctorant is absent if so incrment
+        // nombreAbsence
         return null;
     }
 }
