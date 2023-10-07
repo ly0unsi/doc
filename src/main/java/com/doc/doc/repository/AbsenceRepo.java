@@ -13,12 +13,10 @@ public interface AbsenceRepo extends JpaRepository<Absence, Long> {
 
     List<Absence> findByDoctorant(Long doctorantId);
 
-    @Query("SELECT YEAR(a.reunion.date) AS year, COUNT(*) AS absenceCount, " +
-            "(SELECT COUNT(r) FROM Reunion r WHERE :doctorantId IN (SELECT d.id FROM r.listParticipants d) AND YEAR(r.date) = YEAR(a.reunion.date)) AS totalReunions "
-            +
-            "FROM Absence a " +
-            "WHERE a.doctorant= :doctorantId " +
-            "GROUP BY YEAR(a.reunion.date)")
+    @Query("SELECT YEAR(r.date) AS year, COUNT(a.id) AS absenceCount, COUNT(r.id) AS totalReunions " +
+            "FROM Reunion r " +
+            "LEFT JOIN Absence a ON r = a.reunion AND a.doctorant.id = :doctorantId " +
+            "GROUP BY YEAR(r.date)")
     List<Object[]> countAbsencesByYear(@Param("doctorantId") Long doctorantId);
 
 }

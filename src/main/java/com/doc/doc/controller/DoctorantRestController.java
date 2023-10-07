@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.doc.doc.dto.EtatDto;
+import com.doc.doc.dto.PublicationDto;
 import com.doc.doc.dto.YearlyAbsenceCount;
 import com.doc.doc.model.Doctorant;
 import com.doc.doc.model.EtatAvancement;
@@ -69,5 +70,32 @@ public class DoctorantRestController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(etatsAvancement);
+    }
+
+    @GetMapping("/api/v1/doctorants/publications/{docId}")
+    public ResponseEntity<List<PublicationDto>> loadPublications(@PathVariable Long docId) {
+        Doctorant doctorant = doctorantRepo.findById(docId).orElse(null); // Get the
+
+        List<Publication> pubs = doctorant.getPublications();
+        List<PublicationDto> pubsRes = mapPublicationsToDtos(pubs);
+        return ResponseEntity.ok(pubsRes);
+    }
+
+    public List<PublicationDto> mapPublicationsToDtos(List<Publication> publications) {
+        return publications.stream()
+                .map(this::mapPublicationToDto)
+                .collect(Collectors.toList());
+    }
+
+    public PublicationDto mapPublicationToDto(Publication publication) {
+        PublicationDto publicationDto = new PublicationDto();
+        publicationDto.setTitle(publication.getTitle());
+        publicationDto.setResume(publication.getResume());
+        publicationDto.setArticlePDF(publication.getArticlePDF());
+        publicationDto.setCodeSourceZIP(publication.getCodeSourceZIP());
+        publicationDto.setCertificatePDF(publication.getCertificatePDF());
+        publicationDto.setPublicationType(publication.getPublicationType());
+
+        return publicationDto;
     }
 }

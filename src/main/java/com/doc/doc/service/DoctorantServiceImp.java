@@ -25,9 +25,7 @@ public class DoctorantServiceImp implements DoctorantService {
 
     @Override
     public List<Publication> loadPublications(Long docid) {
-        Doctorant doctorant = doctorantRepo.findById(docid).orElse(null);
-        List<Doctorant> doctorants = Arrays.asList(doctorant);
-        return publicationRepo.findPublicationsByDoctorantId(docid);
+        return publicationRepo.findByAuteurId(docid);
     }
 
     @Override

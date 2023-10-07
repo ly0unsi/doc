@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -38,4 +41,6 @@ public class Personne {
     private String password;
     @Column(name = "Adresse")
     private String adresse;
+    @ManyToMany
+    private List<Publication> publications = new ArrayList<Publication>();
 }

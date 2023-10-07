@@ -38,10 +38,11 @@
                                     <tr th:each="doctorant : ${doctorants}" class="align-middle">
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                <img th:src="${doctorant?.picture}"
                                                     class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
                                                 <div>
-                                                    <div class="h6 mb-0 lh-1" th:text="${doctorant?.fname}">Mark Voldov
+                                                    <div class="h6 mb-0 lh-1"
+                                                        th:text="${doctorant?.fname+' '+doctorant?.lname}">Mark Voldov
                                                     </div>
                                                 </div>
                                             </div>
@@ -60,7 +61,8 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a href="#!" class="dropdown-item" data-bs-toggle="modal"
-                                                        data-bs-target="#pubModal">Publications</a>
+                                                        data-bs-target="#pubModal"
+                                                        th:onclick="'loadPublication(' + ${doctorant.id} + ') '">Publications</a>
                                                     <a href="#!" class="dropdown-item" data-bs-toggle="modal"
                                                         data-bs-target="#avancementModal"
                                                         th:onclick="'loadAvancement(' + ${doctorant.id} + ') '">Etat
@@ -90,11 +92,10 @@
     </script>
     <!-- Les publications modela -->
     <div class="modal fade" id="pubModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width: 58%;">
+        <div class="modal-dialog" style="max-width: 84%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Les publications
-                        de Mark</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Les publications</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -111,26 +112,51 @@
                                 <th scope="col">Voir Resume</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
+
+
+
+                        </tbody>
+                        <script id="publication-template" type="text/template">
+                            {{#pubs}}
                             <tr>
+                                <td>{{title}}</td>
+                                <td>{{publicationType}}</td>
+                                <td>
+                                    <span><i class="fa fa-file-pdf-o text-danger me-1"></i></span>
+                                    <a  href="pdf/{{articlePDF}}" download="{{articlePDF}}">
+                                        {{articlePDF}}
 
-                                <td>Publication 1</td>
-                                <td>Revue</td>
-
-                                <td><span><i class="fa fa-file-pdf-o text-danger me-1"></i></span>Article 1</td>
-                                <td><span class="w-10">
+                                    </a>
+                                    
+                                </td>
+                                <td>
+                                    <span class="w-10">
                                         <i class="fa fa-code me-1 text-primary"></i>
-                                    </span>Code source 1</td>
-                                <td><span><i class="fa fa-file-pdf-o text-danger me-1"></i></span>Certificat 1</td>
-                                <td class="text-center"><a href="#!" class="m-auto"
-                                        style="text-decoration: none;color: inherit;" data-bs-toggle="modal"
+                                    </span>
+                                    <a  href="zip/{{codeSourceZIP}}" download="{{codeSourceZIP}}">
+                                        {{codeSourceZIP}}
+
+                                    </a>
+                                    
+                                </td>
+                                <td>
+                                    <span><i class="fa fa-file-pdf-o text-danger me-1"></i></span>
+                                    <a  href="pdf/{{certificatePDF}}" download=" {{certificatePDF}}">
+                                         {{certificatePDF}}
+
+                                    </a>
+                                   
+                                </td>
+                                <td class="text-center">
+                                    <a href="#!" onclick="showResume('{{resume}}')" class="m-auto" style="text-decoration: none; color: inherit;" data-bs-toggle="modal"
                                         data-bs-target="#resumeModal">
                                         <i class="fa fa-eye me-1"></i>
                                     </a>
                                 </td>
                             </tr>
-
-                        </tbody>
+                            {{/pubs}}
+                        </script>
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -149,7 +175,7 @@
                     <h5 class="modal-title">Resume de publication 1</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="resume">
                     zzzzzzzzzzzzzzzz
                 </div>
                 <div class="modal-footer">
@@ -167,7 +193,7 @@
         <div class="modal-dialog" style="max-width: 58%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Presence/Absence</h5>
+                    <h5 class="modal-title" id="ptitle">Presence/Absence</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -207,7 +233,9 @@
                     </div> -->
                     <div class="row">
                         <div class="col-xl-12">
-                            <div class="card mb-3 card-body">
+                            <div class="card mb-3 card-body" style="height: 70vh;
+                            overflow: hidden;
+                            overflow-y: scroll;">
                                 <div class="" style="height:65vh;">
                                     <canvas class="m-auto" id="barChart"
                                         style="width: 200px !important;height: 200px !important;" width="200px"
@@ -216,12 +244,15 @@
                                 <div class="align-items-center " id="cardsContainer" style="padding: 0 10px 0 10px;">
                                     <script id="card-template" type="text/template">
                                             <div class="row">
-                                                <div class="col" style="    background: whitesmoke;
-                                                padding: 18px;
+                                                <div class="col shadow-md" style=" 
+                                                background: #eeecfd;
+                                                padding: 9px 18px 0px 11px;
                                                 border-radius: 11px;
-                                                margin-top: 13px;">
+                                                margin-top: 13px;
+                                                border: 1px solid #673AB7;
+                                                ">
                                                     <div class="overflow-hidden flex-nowrap">
-                                                        <h5 class="mb-1">
+                                                        <h5 class="mb-1" style="color: #1b004c;">
                                                             <a href="#!" class="text-reset">{{title}}</a>
                                                         </h5>
                                                         <span class="text-muted d-block mb-2 small">
