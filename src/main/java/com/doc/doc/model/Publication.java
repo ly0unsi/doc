@@ -33,6 +33,6 @@ public class Publication {
 
     @Column(name = "PublicationType")
     private PublicationType publicationType;
-    @OneToMany(mappedBy = "publication")
-    private List<AuteurPublication> auteur = new ArrayList<>();
+    @ManyToMany
+    private List<Personne> auteur = new ArrayList<>();
 }

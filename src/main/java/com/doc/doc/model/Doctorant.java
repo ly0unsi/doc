@@ -2,6 +2,7 @@ package com.doc.doc.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @DiscriminatorValue("doctorant")
 public class Doctorant extends Personne {
@@ -28,4 +30,5 @@ public class Doctorant extends Personne {
 
     @OneToOne(mappedBy = "doctorant")
     private SujetThese sujetThese;
+
 }

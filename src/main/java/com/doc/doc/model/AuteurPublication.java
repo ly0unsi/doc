@@ -15,11 +15,11 @@ public class AuteurPublication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "pub")
-    private Publication publication;
-    @ManyToOne
-    @JoinColumn(name = "auteur")
-    private Auteur auteur;
+    // @ManyToOne
+    // @JoinColumn(name = "pub")
+    // private Publication publication;
+    // @ManyToOne
+    // @JoinColumn(name = "auteur")
+    // private Auteur auteur;
 
 }

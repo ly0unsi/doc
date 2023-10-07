@@ -5,12 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(builderMethodName = "personneBuilder")
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "entity_type")
@@ -38,4 +41,6 @@ public class Personne {
     private String password;
     @Column(name = "Adresse")
     private String adresse;
+    @ManyToMany
+    private List<Publication> publications = new ArrayList<Publication>();
 }
