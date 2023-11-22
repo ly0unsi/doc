@@ -13,15 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Auteur extends Personne {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@DiscriminatorValue("auteur")
+public class Auteur extends Personne{
     @Column(name = "Role")
     private String role;
     @Column(name = "DateContribution")
     private Instant dateContribution;
     // @OneToMany(mappedBy = "auteur")
     // private List<AuteurPublication> publications = new ArrayList<>();
+
 
 }

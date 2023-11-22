@@ -28,11 +28,11 @@ table th {
     background-color: #eeecfd !important;
 }
 
-/* #barChart {
+#barChart {
 
     height: 65vh !important;
     width: 100% !important;
-} */
+}
 
 .chartContainer {
     background: whitesmoke;
