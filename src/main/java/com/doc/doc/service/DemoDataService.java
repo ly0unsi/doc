@@ -113,15 +113,20 @@ public class DemoDataService {
                                 Arrays.asList(absence1, absence2, absence3, absence4, absence5));
                 absenceRepository.saveAll(absences);
 
-                SujetThese sujetThese1 = createSujetThese("Sujet1", "Sujet  Description", "Keyword 1, Keyword2 ",
+                SujetThese sujetThese1 = createSujetThese("videos generation using AI", "Sujet Description",
+                                "Keyword 1, Keyword2 ",
                                 doctorant1);
-                SujetThese sujetThese2 = createSujetThese("Sujet2  Title", "Sujet  Description", "Keyword 1, Keyword2 ",
+                SujetThese sujetThese2 = createSujetThese("Arabic Sign Language Recognition", "Sujet  Description",
+                                "Keyword 1, Keyword2 ",
                                 doctorant2);
-                SujetThese sujetThese3 = createSujetThese("Sujet3", "Sujet  Description", "Keyword 1, Keyword2 ",
+                SujetThese sujetThese3 = createSujetThese("Real-Time Quran Error Correction", "Sujet  Description",
+                                "Keyword 1, Keyword2 ",
                                 doctorant3);
-                SujetThese sujetThese4 = createSujetThese("Sujet4", "Sujet  Description", "Keyword 1, Keyword2 ",
+                SujetThese sujetThese4 = createSujetThese("Student Attention Analysis System", "Sujet  Description",
+                                "Keyword 1, Keyword2 ",
                                 doctorant4);
-                SujetThese sujetThese5 = createSujetThese("Sujet5", "Sujet  Description", "Keyword 1, Keyword2 ",
+                SujetThese sujetThese5 = createSujetThese("Quranic Verse Link Mapping", "Sujet  Description",
+                                "Keyword 1, Keyword2 ",
                                 doctorant5);
                 List<SujetThese> sujets = new ArrayList<>(
                                 Arrays.asList(sujetThese1, sujetThese2, sujetThese3, sujetThese4, sujetThese5));
@@ -165,18 +170,18 @@ public class DemoDataService {
                 Publication publication2 = new Publication();
                 publication2.setTitle("Publication 2 Title");
                 publication2.setResume("Publication 2 Resume");
-                publication2.setCertificatePDF("certificat1.pdf");
+                publication2.setCertificatePDF("certificat2.pdf");
                 publication2.setCodeSourceZIP("sourcecode.rar");
-                publication2.setArticlePDF("article1.pdf");
+                publication2.setArticlePDF("article2.pdf");
                 publication2.setPublicationType(PublicationType.CONFERENCES);
                 // Set other properties for publication2
 
                 Publication publication3 = new Publication();
                 publication3.setTitle("Publication 3 Title");
                 publication3.setResume("Publication 3 Resume");
-                publication3.setCertificatePDF("certificat1.pdf");
+                publication3.setCertificatePDF("certificat3.pdf");
                 publication3.setCodeSourceZIP("sourcecode.rar");
-                publication3.setArticlePDF("article1.pdf");
+                publication3.setArticlePDF("article3.pdf");
                 publication3.setPublicationType(PublicationType.REVUES);
                 // Set other properties for publication3
 
@@ -210,7 +215,7 @@ public class DemoDataService {
                 doctorant1.setPicture(profile);
                 doctorant1.setLogin("login");
                 doctorant1.setPassword("password");
-                doctorant1.setAdresse("Masiira 1");
+                doctorant1.setAdresse("Massira 1");
 
                 doctorant1 = doctorantRepository.save(doctorant1);
                 return doctorant1;
