@@ -13,6 +13,8 @@
     <!-- Define page-specific content -->
     <div>
 
+
+
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-3 mb-lg-5">
@@ -27,8 +29,8 @@
                                     <tr>
                                         <th>Nom</th>
                                         <th>Numero d'aboutissement</th>
-                                        <th>CIN</th>
                                         <th>CNE</th>
+                                        <th>CIN</th>
                                         <th>Premiere inscription</th>
                                         <th>Sujet de these</th>
                                         <th class="text-end">Action</th>
@@ -41,8 +43,12 @@
                                                 <img th:src="${doctorant?.picture}"
                                                     class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
                                                 <div>
-                                                    <div class="h6 mb-0 lh-1"
-                                                        th:text="${doctorant?.fname+' '+doctorant?.lname}">Mark Voldov
+                                                    <div class="h6 mb-0 lh-1">
+                                                        <a th:href="@{/doctorants/{id}(id=${doctorant?.id})}"
+                                                            class="h6 mb-0 lh-1"
+                                                            th:text="${doctorant?.fname+' '+doctorant?.lname}">
+                                                            Mark Voldov
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>

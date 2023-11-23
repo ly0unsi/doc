@@ -28,10 +28,15 @@ table th {
     background-color: #eeecfd !important;
 }
 
-#barChart {
+/* #barChart {
 
     width: 400px !important;
     height: 400px !important;
+} */
+.tab-pane {
+    overflow-y: scroll;
+    max-height: 79vh;
+    padding: 15px;
 }
 
 .chartContainer {
@@ -94,11 +99,22 @@ a {
 .profile-userpic img {
     float: none;
     margin: 0 auto;
-    width: 50%;
-    height: 50%;
+    width: 45%;
+    height: 45%;
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
     border-radius: 50% !important
+}
+
+svg {
+    vertical-align: middle;
+    margin-right: 6px;
+    color: #8476ee;
+}
+
+h6 {
+    font-size: 1em !important;
+    font-weight: 700 !important;
 }
 
 .profile-usertitle {
@@ -107,17 +123,34 @@ a {
 }
 
 .profile-usertitle-name {
-    color: #5a7391;
+    color: #323232;
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 7px
+}
+
+.list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: .25rem;
+}
+
+.list-group li {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
 }
 
 .profile-usertitle-job {
     text-transform: uppercase;
     color: #5b9bd1;
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 600;
     margin-bottom: 7px
 }
 
@@ -242,10 +275,17 @@ a {
 }
 
 .portlet {
+    position: relative;
     margin-top: 0;
     margin-bottom: 25px;
     padding: 0;
     border-radius: 4px
+}
+
+.retrun_butt {
+    position: absolute;
+    top: 16px;
+    left: 14px;
 }
 
 .portlet.portlet-fullscreen {

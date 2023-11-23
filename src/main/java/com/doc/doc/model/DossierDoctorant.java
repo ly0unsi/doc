@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class DossierDoctorant extends Doctorant{
+public class DossierDoctorant extends Doctorant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,5 +20,6 @@ public class DossierDoctorant extends Doctorant{
     private Long dossierID;
     @Column(name = "NumeroReference")
     private String numeroReference;
+    private Date inscription;
 
 }
