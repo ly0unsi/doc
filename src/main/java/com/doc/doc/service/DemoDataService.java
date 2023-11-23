@@ -21,6 +21,7 @@ import com.doc.doc.model.AuteurPublication;
 import com.doc.doc.model.Doctorant;
 import com.doc.doc.model.EtatAvancement;
 import com.doc.doc.model.Personne;
+import com.doc.doc.model.Professeur;
 import com.doc.doc.model.Publication;
 import com.doc.doc.model.Reunion;
 import com.doc.doc.model.SujetThese;
@@ -30,11 +31,15 @@ import com.doc.doc.repository.AuteurRepo;
 import com.doc.doc.repository.DoctorantRepo;
 import com.doc.doc.repository.EtatAvancementRepo;
 import com.doc.doc.repository.PersonneRepo;
+import com.doc.doc.repository.ProfesseurRepo;
 import com.doc.doc.repository.PublicationRepo;
 import com.doc.doc.repository.ReunionRepo;
 import com.doc.doc.repository.SujetTheseRepo;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class DemoDataService {
 
         private final DoctorantRepo doctorantRepository;
@@ -45,25 +50,7 @@ public class DemoDataService {
         private final AuteurRepo auteurRepo;
         private final PublicationRepo publicationRepo;
         private final AuteurPublicationRepo auteurPublicationRepo;
-
-        @Autowired
-        public DemoDataService(DoctorantRepo doctorantRepository,
-                        AbsenceRepo absenceRepository,
-                        ReunionRepo reunionRepository,
-                        SujetTheseRepo sujetTheseRepo,
-                        EtatAvancementRepo etatAvancementRepo,
-                        PublicationRepo publicationRepo,
-                        AuteurRepo auteurRepo,
-                        AuteurPublicationRepo auteurPublicationRepo) {
-                this.doctorantRepository = doctorantRepository;
-                this.absenceRepository = absenceRepository;
-                this.reunionRepository = reunionRepository;
-                this.sujetTheseRepo = sujetTheseRepo;
-                this.etatAvancementRepo = etatAvancementRepo;
-                this.publicationRepo = publicationRepo;
-                this.auteurRepo = auteurRepo;
-                this.auteurPublicationRepo = auteurPublicationRepo;
-        }
+        private final ProfesseurRepo professeurRepo;
 
         @Transactional
         public void insertDemoData() {
@@ -90,20 +77,32 @@ public class DemoDataService {
                 List<Reunion> reunions = new ArrayList<>(
                                 Arrays.asList(reunion1, reunion2, reunion3, reunion4, reunion5, reunion6));
                 reunionRepository.saveAll(reunions);
+                Professeur prof1 = new Professeur();
+                prof1.setFname("Khalid");
+                prof1.setLname("Housni");
+                prof1 = professeurRepo.save(prof1);
+                Professeur prof2 = new Professeur();
+                prof2.setFname("Abdelalim");
+                prof2.setLname("Sadiq");
+                prof2 = professeurRepo.save(prof2);
+                Professeur prof3 = new Professeur();
+                prof3.setFname("Lbachir");
+                prof3.setLname("Ameur");
+                prof3 = professeurRepo.save(prof3);
 
                 Doctorant doctorant1 = insertDoctorant("Abdellah", "LYOUNSI", "abdllahlyounsi@gmail.com",
-                                "https://bootdey.com/img/Content/avatar/avatar7.png", reunions);
+                                "https://bootdey.com/img/Content/avatar/avatar7.png", reunions, prof1);
 
-                Doctorant doctorant2 = insertDoctorant("Salma", "LAGHBISSI", "abdllahlyounsi@gmail.com",
-                                "https://bootdey.com/img/Content/avatar/avatar3.png", reunions);
+                Doctorant doctorant2 = insertDoctorant("Salma", "LAGHBISSI", "salmalaghbissi@gmail.com",
+                                "https://bootdey.com/img/Content/avatar/avatar3.png", reunions, prof2);
 
-                Doctorant doctorant3 = insertDoctorant("Mohammed", "EDDARIF", "abdllahlyounsi@gmail.com",
-                                "https://bootdey.com/img/Content/avatar/avatar6.png", reunions);
+                Doctorant doctorant3 = insertDoctorant("Mohammed", "EDDARIF", "mohammededdariff@gmail.com",
+                                "https://bootdey.com/img/Content/avatar/avatar6.png", reunions, prof3);
 
-                Doctorant doctorant4 = insertDoctorant("Zakia", "ENNOUGOME", "abdllahlyounsi@gmail.com",
-                                "https://bootdey.com/img/Content/avatar/avatar3.png", reunions);
-                Doctorant doctorant5 = insertDoctorant("Yassine", "ZEGHMOUTI", "abdllahlyounsi@gmail.com",
-                                "https://bootdey.com/img/Content/avatar/avatar1.png", reunions);
+                Doctorant doctorant4 = insertDoctorant("Zakia", "ENNOUGOME", "zakiaennougoume@gmail.com",
+                                "https://bootdey.com/img/Content/avatar/avatar3.png", reunions, prof1);
+                Doctorant doctorant5 = insertDoctorant("Yassine", "ZEGHMOUTI", "yassinezeghmouti@gmail.com",
+                                "https://bootdey.com/img/Content/avatar/avatar1.png", reunions, prof2);
 
                 Absence absence1 = new Absence(1L, reunion1, doctorant1.getId(), "Not feeling well");
                 Absence absence2 = new Absence(2L, reunion2, doctorant2.getId(), "Not feeling well");
@@ -201,12 +200,12 @@ public class DemoDataService {
         }
 
         public Doctorant insertDoctorant(String fname, String lname, String email, String profile,
-                        List<Reunion> reunions) {
+                        List<Reunion> reunions, Professeur prof) {
 
-                Doctorant doctorant1 = new Doctorant(null, "Apogee1", "CNE1", reunions, null);
+                Doctorant doctorant1 = new Doctorant(null, "19007989", "CNE1", reunions, null, prof);
                 doctorant1.setFname(fname);
                 doctorant1.setLname(lname);
-                doctorant1.setCin("123456789");
+                doctorant1.setCin("G756777");
                 doctorant1.setEmail(email);
                 doctorant1.setPicture(profile);
                 doctorant1.setLogin("login");

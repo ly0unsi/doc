@@ -31,4 +31,7 @@ public class Doctorant extends Personne {
     @OneToOne(mappedBy = "doctorant")
     private SujetThese sujetThese;
 
+    @ManyToOne
+    private Professeur encadrant;
+
 }

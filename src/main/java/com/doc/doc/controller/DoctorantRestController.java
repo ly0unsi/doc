@@ -56,7 +56,7 @@ public class DoctorantRestController {
     @GetMapping("/api/v1/doctorants/avancement/{docId}")
     public ResponseEntity<List<EtatDto>> avancement(@PathVariable Long docId) {
 
-        Doctorant doctorant = doctorantRepo.findById(1L).orElse(null); // Get the
+        Doctorant doctorant = doctorantRepo.findById(docId).orElse(null); // Get the
 
         // Doctorant instance
         SujetThese sujetThese = doctorant.getSujetThese();

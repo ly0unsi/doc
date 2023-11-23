@@ -1,5 +1,27 @@
 
-const loadAbsence = (docid, name) => {
+const renderPublications = (data) => {
+
+    const template = $('#publication-template').html();
+
+    const rendered = Mustache.render(template, { pubs: data });
+
+    $('#tbody').html(rendered);
+}
+const loadPublication = (docid) => {
+    $.ajax({
+        type: "GET",
+        url: "/api/v1/doctorants/publications/" + docid,
+        dataType: "json",
+        success: function (response) {
+            renderPublications(response)
+        }
+    })
+}
+const showResume = (resume) => {
+    $("#resume").html(resume)
+}
+
+const loadAbsence = (docid) => {
 
     $.ajax({
         type: "GET",
@@ -152,27 +174,15 @@ const loadAvancement = (docid) => {
     })
 }
 
+$(document).ready(function () {
+    // Get text from the span with id 'mySpan'
+    var docId = $('#docId').text();
+    loadPublication(docId)
+    loadAbsence(docId)
+    loadAvancement(docId);
+    $(".nav-tabs li a").click(function () {
+        $(".nav-tabs li").removeClass("active");
+        $(this).parent().addClass("active");
+    });
 
-const loadPublication = (docid) => {
-    $.ajax({
-        type: "GET",
-        url: "/api/v1/doctorants/publications/" + docid,
-        dataType: "json",
-        success: function (response) {
-            renderPublications(response)
-        }
-    })
-}
-const showResume = (resume) => {
-    $("#resume").html(resume)
-}
-
-const renderPublications = (data) => {
-
-    const template = $('#publication-template').html();
-
-    const rendered = Mustache.render(template, { pubs: data });
-
-    $('#tbody').html(rendered);
-}
-
+});
